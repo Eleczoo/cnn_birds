@@ -4,3 +4,5 @@ tensorflow
 matplotlib
 wave
 scipy
+keras
+tqdm
