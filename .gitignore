@@ -2,3 +2,4 @@ archive.zip
 **/.venv
 dataset
 birds
+.test_venv
