@@ -8,4 +8,4 @@ Mel scaled spectrogram on stm32 : https://stackoverflow.com/questions/74165292/h
 
 CMSIS DSP : https://digilent.com/reference/pmod/pmod/mic/ref_manual
 
-PMOD manual stm32 based board : https://digilent.com/reference/pmod/pmod/mic/ref_manual
+<!--PMOD manual stm32 based board : https://digilent.com/reference/pmod/pmod/mic/ref_manual-->
