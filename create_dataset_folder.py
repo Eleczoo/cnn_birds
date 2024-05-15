@@ -83,8 +83,9 @@ for i, row in tqdm(dataset.iterrows()):
 	# spectrogram = 255 - scale_minmax(spectrogram, 0, 255).astype(np.uint8)
 	# print(spectrogram)
 
-	spectrogram = spectrogram_cmsys(samples)
-	spectrogram = 255 - scale_minmax(spectrogram, 0, 255).astype(np.uint8)
+	frequencies, times, spectrogram = signal.spectrogram(samples, sample_rate)
+	spectrogram = 255 - scale_minmax(np.log(spectrogram), 0, 255).astype(np.uint8)
 
-	spec_im = Image.fromarray(spectrogram.T)
+
+	spec_im = Image.fromarray(spectrogram)
 	spec_im.save(f"birds/{row['name'].replace(' ', '_')}/{row['filename'].replace('wav', 'png')}")
