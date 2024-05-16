@@ -1,0 +1,83 @@
+services:
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: development.Dockerfile
+    command: |
+      bash -c "
+        # Create the virtual environment
+        if [ -d .venv ]; 
+        then 
+          echo '.venv exists and is not empty'; 
+        else 
+          echo '.venv does not exist or is empty'; 
+          python3.11 -m venv .venv; 
+        fi &&
+        # Activate the virtual environment
+        source .venv/bin/activate &&
+        # Install the dependencies
+        pip install -r requirements.txt -r requirements-all.txt &&
+        # Run the backend
+        cd src &&
+        uvicorn --reload --host 0.0.0.0 --port 8080 main:app
+      "
+    depends_on:
+      - db
+      - mc
+    environment:
+      - HOST=http://host.docker.internal:8080
+      - S3_HOST=http://host.docker.internal:9000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - 8080:8080
+    working_dir: /workspaces/core-engine-backend
+    volumes:
+      - .:/workspaces/core-engine-backend
+
+  db:
+    container_name: db
+    image: postgres:15.2-alpine
+    command: postgres -c 'max_connections=1000'
+    environment:
+      - POSTGRES_DB=swiss-ai-center
+      - POSTGRES_USER=swiss-ai-center
+      - POSTGRES_PASSWORD=swiss-ai-center
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+
+  minio:
+    container_name: minio
+    image: quay.io/minio/minio:${MINIO_IMAGE_VERSION:-latest}
+    environment:
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=minio123
+    command: server --address ":9000" --console-address ":9001" /data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - ./minio-data:/data:rw
+
+  mc:
+    container_name: mc
+    image: minio/mc:${MC_IMAGE_VERSION:-latest}
+    depends_on:
+      - minio
+    environment:
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=minio123
+    entrypoint: >
+      sh -c "
+        mc config host rm local;
+        mc config host add --api s3v4 local http://minio:9000 $${MINIO_ROOT_USER} $${MINIO_ROOT_PASSWORD};
+        mc mb --ignore-existing local/engine;
+      "

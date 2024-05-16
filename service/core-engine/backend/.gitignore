@@ -1,0 +1,8 @@
+## Check parent `.gitignore` file for complete ignored files
+
+## Database
+*.db
+
+## Docker volumes
+db-data
+minio-data

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: glitchtip-config
+  labels:
+    app: glitchtip
+data:
+  ENABLE_USER_REGISTRATION: "False"
+  DATABASE_URL: "postgres://postgres:postgres@postgres:5432/postgres"
+  SECRET_KEY: "change_me"
+  PORT: "8000"
+  EMAIL_URL: "smtp://email:password@smtp_url:465"
+  GLITCHTIP_DOMAIN: "http://localhost:8000"
+  DEFAULT_FROM_EMAIL: "info@swiss-ai-center.ch"
+  CELERY_WORKER_AUTOSCALE: "1,10"
+  CELERY_WORKER_MAX_TASKS_PER_CHILD: "10000"

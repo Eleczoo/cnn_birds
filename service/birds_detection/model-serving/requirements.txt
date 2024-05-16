@@ -1,0 +1,6 @@
+common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
+numpy
+tensorflow
+scipy
+pillow
+librosa

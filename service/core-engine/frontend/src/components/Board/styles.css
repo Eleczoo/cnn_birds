@@ -1,0 +1,148 @@
+.text-updater-node {
+    height: 50px;
+    border: 1px solid #eee;
+    padding: 5px;
+    border-radius: 5px;
+    background: white;
+}
+
+.text-updater-node label {
+    display: block;
+    color: #777;
+    font-size: 12px;
+}
+
+.fullscreen::backdrop {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.react-flow__controls {
+    box-shadow: none !important;
+}
+
+.react-flow__handle {
+    background-color: #d41367 !important;
+}
+
+.react-flow__edge-path {
+    stroke: #d41367 !important;
+}
+
+#board[about='light'] > div.react-flow__controls > button {
+    border: 1px solid lightgrey !important;
+    border-radius: 5px !important;
+    padding: 2px !important;
+    margin: 2px !important;
+}
+
+#board[about='light'] > div.react-flow__controls > button:hover {
+    background-color: #C4C4C4 !important;
+    border: 1px solid lightgrey !important;
+    border-radius: 5px !important;
+    padding: 2px !important;
+    margin: 2px !important;
+}
+
+#board[about='dark'] > div.react-flow__controls > button {
+    background-color: #424242 !important;
+    border: 1px solid #212121 !important;
+    border-radius: 5px !important;
+    padding: 2px !important;
+    margin: 2px !important;
+}
+
+#board[about='dark'] > div.react-flow__controls > button:hover {
+    background-color: #9e9e9e !important;
+    border: 1px solid #212121 !important;
+    border-radius: 5px !important;
+    padding: 2px !important;
+    margin: 2px !important;
+}
+
+#board[about='dark'] > svg.react-flow__minimap > path {
+    fill: rgba(255, 255, 255, 0.1) !important;
+}
+
+#board[about='dark'] > svg.react-flow__minimap > rect {
+    fill: #808080 !important;
+}
+
+#board[about='dark'] > div.react-flow__controls > button > svg {
+    fill: white !important;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+.rotating-border {
+    position: relative;
+    z-index: 0;
+    border-radius: 8px;
+    padding: 2px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: -2;
+        width: 200%;
+        height: 270%;
+        background-repeat: no-repeat;
+        background-size: 50% 50%, 50% 50%;
+        background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+        background-image: linear-gradient(135deg, #0088d1, #0088d1, #0088d1, #0088d1);
+        top: -50%;
+        left: -50%;
+        animation: rotate 2s linear infinite;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        width: calc(100% - 4px);
+        height: calc(100% - 4px);
+        background: inherit;
+        border: 0.05em solid #0088d1;
+        border-radius: 6px;
+    }
+}
+
+#timer-general[about='light'] {
+    background-color: white;
+}
+
+#timer-general[about='dark'] {
+    background-color: #424242;
+}
+
+.timer-general {
+    position: absolute;
+    text-align: center;
+    min-width: 80px;
+    padding: 5px;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-radius: 0 0 5px 0;
+}
+
+.timer-general[about='light'] {
+    border-color: lightgrey;
+}
+
+.timer-general[about='dark'] {
+    border-color: #212121;
+}
+
+.timer-step {
+    position: absolute;
+    text-align: center;
+    font-size: 8px !important;
+    min-width: 20px;
+    padding-left: 4px;
+}

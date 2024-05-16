@@ -1,0 +1,18 @@
+## Python
+
+# Environments
+.venv
+venv
+
+# Byte-compiled / optimized / DLL files
+__pycache__
+
+# Pytest cache
+.pytest_cache
+
+# Pytest Coverage
+.coveragerc
+.coverage
+
+# Pytest tests
+tests/
