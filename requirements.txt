@@ -1,10 +1,10 @@
 numpy
 pandas
-tensorflow==2.15
+# tensorflow==2.15
 matplotlib
 wave
 requests
 scipy
 keras
 tqdm
--e git+https://github.com/ARM-software/CMSIS_5.git@5.8.0#egg=CMSISDSP\&subdirectory=CMSIS/DSP/PythonWrapper
+#-e git+https://github.com/ARM-software/CMSIS_5.git@5.8.0#egg=CMSISDSP\&subdirectory=CMSIS/DSP/PythonWrapper
